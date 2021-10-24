@@ -59,4 +59,21 @@ var _quedtionIndext=0;
 var _totalScore=0;
 
 }
+   
+//import 'package:flutter/cupertino.dart';
+
+@override
+wigget build(BuildContext context){
+  return column(
+    children: [
+      Question(
+          question[questionIndex]['questionText'],
+      )//Question
+        ...(question[questionIndex]['answer'],
+    ]
+  )
+}   
+  //2nd 
+   
+   
 
