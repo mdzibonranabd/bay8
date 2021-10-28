@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
     ); //MaterialApp
   }
 }
-//1
+//question
 class Question extends StatelessWidget{
   final String questionText;
   Question(this.questionText);
@@ -135,7 +135,7 @@ class Question extends StatelessWidget{
 
 
 }
-//qustin
+//quiz
 class Quiz extends StatelessWidget {
   final List<Map<String, dynamic>> questions;
   final int questionIndex;
