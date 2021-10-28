@@ -1,85 +1,117 @@
 # bay8//ctrl alter ldeya sob sestem kora jai
 24-10-210
 import 'package:flutter/material.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
-
-class MyApp extends StatelessWidget {
-   @override
-  state <StatelessWidget> createState(){
-     return_MyAppState();
-   }
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
 }
 
-class _MyAppState extends state<MyApp>{
-  final questions= const [
-    //1st
+class _MyAppState extends State<MyApp> {
+  final _questions = const [
     {
-      'questionText':'Q1. AMI abar BEYA JKORBO koba ?',
-      'answer':[
-        {'text':'aj','score':10},
-        {'text':'kal','score':-2},
-        {'text':'porsu','score':-2},
-        {'text':'nextweek','score':-2}
-      ]
+      'questionText': 'Q1. Who created Flutter?',
+      'answers': [
+        {'text': 'Facebook', 'score': -2},
+        {'text': 'Adobe', 'score': -2},
+        {'text': 'Google', 'score': 10},
+        {'text': 'Microsoft', 'score': -2},
+      ],
     },
     {
-      'questionText':'Q1. ami prem korbo koba?',
-      'answer':[
-        {'text':'aj','score':10},
-        {'text':'kal','score':-2},
-        {'text':'porsu','score':-2},
-        {'text':'nextweek',score':-2},
-      ]
-
+      'questionText': 'Q2. What is Flutter?',
+      'answers': [
+        {'text': 'Android Development Kit', 'score': -2},
+        {'text': 'IOS Development Kit', 'score': -2},
+        {'text': 'Web Development Kit', 'score': -2},
+        {
+          'text':
+          'SDK to build beautiful IOS, Android, Web & Desktop Native Apps',
+          'score': 10
+        },
+      ],
     },
     {
-      'questionText':'Q1. amar gf lagba akta koba haba?',
-      'answer':[
-        {'text':'aj','score':10},
-        {'text':'kal','score':-2},
-        {'text':'porsu','score':-2},
-        {'text':'nextweek','score':-2},
-      ]
-
+      'questionText': ' Q3. Which programing language is used by Flutter',
+      'answers': [
+        {'text': 'Ruby', 'score': -2},
+        {'text': 'Dart', 'score': 10},
+        {'text': 'C++', 'score': -2},
+        {'text': 'Kotlin', 'score': -2},
+      ],
     },
     {
-      'questionText':'Q1. darling koba haba?',
-      'answer':[
-        {'text':'aj','score':10},
-        {'text':'kal','score':-2},
-        {'text':'porsu','score':-2},
-        {'text':'nextweek','score':-2},
-      ]
-
+      'questionText': 'Q4. Who created Dart programing language?',
+      'answers': [
+        {'text': 'Lars Bak and Kasper Lund', 'score': 10},
+        {'text': 'Brendan Eich', 'score': -2},
+        {'text': 'Bjarne Stroustrup', 'score': -2},
+        {'text': 'Jeremy Ashkenas', 'score': -2},
+      ],
     },
-  ];//end of questine object
-var _quedtionIndext=0;
-var _totalScore=0;
+    {
+      'questionText':
+      'Q5. Is Flutter for Web and Desktop available in stable version?',
+      'answers': [
+        {
+          'text': 'Yes',
+          'score': -2,
+        },
+        {'text': 'No', 'score': 10},
+      ],
+    },
+  ];
 
+  var _questionIndex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions!');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('StatefulWidget test'),
+          backgroundColor: Colors.indigo,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: _questionIndex < _questions.length
+              ? Quiz(
+            answerQuestion: _answerQuestion,
+            questionIndex: _questionIndex,
+            questions: _questions,
+          ) //Quiz
+              : Result(_totalScore, _resetQuiz),
+        ), //Padding
+      ), //Scaffold
+      debugShowCheckedModeBanner: false,
+    ); //MaterialApp
+  }
 }
-   
-//import 'package:flutter/cupertino.dart';
-
-@override
-wigget build(BuildContext context){
-  return column(
-    children: [
-      Question(
-          question[questionIndex]['questionText'],
-      )//Question
-        ...(question[questionIndex]['answer'],
-    ]
-  )
-}   
-  //2nd 
-   
-   <DOCTPY html>
-      <html long="en">
-         <head>
-            <meta charset="UTF-8">
-            <meta name
-   
-   
-
