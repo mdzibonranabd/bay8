@@ -115,3 +115,120 @@ class _MyAppState extends State<MyApp> {
     ); //MaterialApp
   }
 }
+//1
+class Question extends StatelessWidget{
+  final String questionText;
+  Question(this.questionText);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.all(30.00),
+      child: Text(
+        questionText,
+        style: TextStyle(fontSize: 30),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+
+}
+//qustin
+class Quiz extends StatelessWidget {
+  final List<Map<String, dynamic>> questions;
+  final int questionIndex;
+  final Function answerQuestion;
+
+  Quiz({
+    required this.questions,
+    required this.answerQuestion,
+    required this.questionIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Question(questions[questionIndex]['questionText'],), //Question
+        ...(questions[questionIndex]['answers'] as List<Map<String, dynamic>>)
+            .map((answer) {
+          return Answer(() => answerQuestion(answer['score']), answer['text']);
+        }).toList()
+      ],
+    ); //Column
+  }
+}
+//answer
+class Answer extends StatelessWidget{
+  final VoidCallback selectHandler;
+  final String answerText;
+
+  Answer(this.selectHandler,this.answerText);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        color: Colors.indigo,
+        textColor: Colors.white,
+        child:Text(answerText),
+        onPressed: selectHandler,
+      ),
+    );
+  }
+}
+//result
+class Result extends StatelessWidget{
+  final int resultScore;
+  final VoidCallback resetHandler;
+
+  Result(this.resultScore, this.resetHandler);
+
+  String get resultPharse{
+    String resultText;
+    if(resultScore>40){
+      resultText= "Tumi Porimoni";
+    } else if(resultScore>30){
+      resultText= "Tumi Opu Biswas";
+    }else if(resultScore>20){
+      resultText= "Tumi Bubli";
+    } else if(resultScore>10){
+      resultText= "Tumi Popy";
+    } else{
+      resultText="Tumi Mithila";
+    }
+    return resultText;
+  }
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            resultPharse,
+            style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            'Score: ' '$resultScore',
+            style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          FlatButton(
+            child: Text('Reset Quiz'),
+            textColor: Colors.blueAccent,
+            onPressed:resetHandler,
+          )
+        ],
+      ),
+    );
+  }
+}
